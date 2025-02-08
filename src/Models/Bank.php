@@ -50,9 +50,6 @@ class Bank extends Model
         'taxonomy_id' => 'integer',
         'plugin_id' => 'integer',
         'status' => 'boolean',
-        'deleted_at' => 'datetime',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
     ];
 
     public function getTable()
