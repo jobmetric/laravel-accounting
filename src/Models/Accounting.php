@@ -25,7 +25,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
- * @method Accounting find(int $int)
+ * @property_read Accounting $accounting
+ *
+ *@method Accounting find(int $int)
  */
 class Accounting extends Model
 {
@@ -59,6 +61,7 @@ class Accounting extends Model
         'level' => 'integer',
         'editable' => 'integer',
         'deletable' => 'integer',
+        'deleted_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
@@ -70,11 +73,11 @@ class Accounting extends Model
 
 
     /**
-     * parent_id relation
+     * parent relation
      *
      * @return BelongsTo
      */
-    public function Accounting(): BelongsTo
+    public function accounting(): BelongsTo
     {
         return $this->BelongsTo(Accounting::class, 'parent_id');
     }
