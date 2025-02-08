@@ -1,0 +1,87 @@
+<?php
+
+namespace JobMetric\Accounting\Models;
+
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use JobMetric\Authio\Models\User;
+
+/**
+ * JobMetric\Accounting\Models\DocumentItem
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $document_id
+ * @property string $countingable_type
+ * @property int $countingable_id
+ * @property int|null $reference_id
+ * @property int $sign
+ * @property float $amount
+ * @property Carbon $deleted_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ *
+ * @property-read User $user
+ * @property-read Document $document
+ *
+ * @method DocumentItem find(int $int)
+ * @method DocumentItem findOrFail(int $int)
+ */
+class DocumentItem extends Model
+{
+    use HasFactory,
+        SoftDeletes;
+
+    protected $fillable = [
+        'user_id',
+        'document_id',
+        'countingable_type',
+        'countingable_id',
+        'reference_id',
+        'sign',
+        'amount',
+    ];
+
+    /**
+     * The Bank that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'user_id' => 'integer',
+        'document_id' => 'integer',
+        'countingable_type' => 'string',
+        'countingable_id' => 'integer',
+        'reference_id' => 'integer',
+        'sign' => 'integer',
+        'amount' => 'decimal:3',
+    ];
+
+    public function getTable()
+    {
+        return config('accounting.tables.document_item', parent::getTable());
+    }
+
+    /**
+     * user relation
+     *
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->BelongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * document relation
+     *
+     * @return BelongsTo
+     */
+    public function document(): BelongsTo
+    {
+        return $this->BelongsTo(Document::class, 'document_id');
+    }
+}
