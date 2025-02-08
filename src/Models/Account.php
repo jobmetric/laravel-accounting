@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * JobMetric\Accounting\Models\Accounting
+ * JobMetric\Accounting\Models\Account
  *
  * @property int $id
- * @property int $parent_id
+ * @property int|null $parent_id
  * @property string $group
  * @property int $nature
- * @property string $conditions
+ * @property array|null $conditions
  * @property bool $status
  * @property bool $visible
  * @property int $level
@@ -25,11 +25,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
- * @property_read Accounting $accounting
+ * @property-read Account $account
  *
- *@method Accounting find(int $int)
+ * @method Account find(int $int)
  */
-class Accounting extends Model
+class Account extends Model
 {
     use HasFactory,
         SoftDeletes;
@@ -47,7 +47,7 @@ class Accounting extends Model
     ];
 
     /**
-     * The Accountings that should be cast.
+     * The Account that should be cast.
      *
      * @var array<string, string>
      */
@@ -55,15 +55,12 @@ class Accounting extends Model
         'parent_id' => 'string',
         'group' => 'boolean',
         'nature' => 'boolean',
-        'conditions' => 'integer',
-        'status' => 'integer',
-        'visible' => 'integer',
+        'conditions' => 'array',
+        'status' => 'boolean',
+        'visible' => 'boolean',
         'level' => 'integer',
-        'editable' => 'integer',
-        'deletable' => 'integer',
-        'deleted_at' => 'datetime',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
+        'editable' => 'boolean',
+        'deletable' => 'boolean',
     ];
 
     public function getTable()
@@ -71,14 +68,13 @@ class Accounting extends Model
         return config('accounting.tables.account', parent::getTable());
     }
 
-
     /**
      * parent relation
      *
      * @return BelongsTo
      */
-    public function accounting(): BelongsTo
+    public function parent(): BelongsTo
     {
-        return $this->BelongsTo(Accounting::class, 'parent_id');
+        return $this->BelongsTo(Account::class, 'parent_id');
     }
 }
