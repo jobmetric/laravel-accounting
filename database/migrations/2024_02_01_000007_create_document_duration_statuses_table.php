@@ -31,6 +31,8 @@ return new class extends Migration {
              * use: @extends DocumentDurationStatusEnum
              */
 
+            $table->string('description')->nullable();
+
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
