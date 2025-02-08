@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use JobMetric\Authio\Models\User;
 
@@ -26,6 +27,7 @@ use JobMetric\Authio\Models\User;
  *
  * @property-read User $user
  * @property-read Document $document
+ * @property-read Model $countingable
  *
  * @method DocumentItem find(int $int)
  * @method DocumentItem findOrFail(int $int)
@@ -83,5 +85,15 @@ class DocumentItem extends Model
     public function document(): BelongsTo
     {
         return $this->BelongsTo(Document::class, 'document_id');
+    }
+
+    /**
+     * countingable relation
+     *
+     * @return MorphTo
+     */
+    public function countingable(): MorphTo
+    {
+        return $this->morphTo();
     }
 }
