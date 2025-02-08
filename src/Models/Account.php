@@ -48,7 +48,7 @@ class Account extends Model
     ];
 
     /**
-     * The Account that should be cast.
+     * The account that should be cast.
      *
      * @var array<string, string>
      */

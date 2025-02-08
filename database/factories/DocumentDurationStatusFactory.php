@@ -37,7 +37,7 @@ class DocumentDurationStatusFactory extends Factory
      */
     public function setDocumentDurationId(int $document_duration_id): self
     {
-        return $this->state(fn() => [
+        return $this->state(fn(array $attributes) => [
             'document_duration_id' => $document_duration_id,
         ]);
     }
@@ -51,7 +51,7 @@ class DocumentDurationStatusFactory extends Factory
      */
     public function setDocumentItemId(int $document_item_id): self
     {
-        return $this->state(fn() => [
+        return $this->state(fn(array $attributes) => [
             'document_item_id' => $document_item_id,
         ]);
     }
@@ -65,7 +65,7 @@ class DocumentDurationStatusFactory extends Factory
      */
     public function setStatus(string $status): self
     {
-        return $this->state(fn() => [
+        return $this->state(fn(array $attributes) => [
             'status' => $status,
         ]);
     }
@@ -79,7 +79,7 @@ class DocumentDurationStatusFactory extends Factory
      */
     public function setDescription(string|null $description): self
     {
-        return $this->state(fn() => [
+        return $this->state(fn(array $attributes) => [
             'description' => $description,
         ]);
     }

@@ -27,6 +27,8 @@ class DocumentDurationStatus extends Model
 {
     use HasFactory;
 
+    const UPDATED_AT = null;
+
     protected $fillable = [
         'document_duration_id',
         'document_item_id',

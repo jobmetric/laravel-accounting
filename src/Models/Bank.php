@@ -41,7 +41,7 @@ class Bank extends Model
     ];
 
     /**
-     * The Bank that should be cast.
+     * The bank that should be cast.
      *
      * @var array<string, string>
      */
