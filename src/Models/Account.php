@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read Account $account
  *
  * @method Account find(int $int)
+ * @method Account findOrFail(int $int)
  */
 class Account extends Model
 {

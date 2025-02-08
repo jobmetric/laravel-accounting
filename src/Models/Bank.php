@@ -15,6 +15,8 @@ use JobMetric\Taxonomy\Models\Taxonomy;
  *
  * @property int $id
  * @property string $type
+ * @property int $taxonomy_id
+ * @property int $plugin_id
  * @property bool $status
  * @property Carbon $deleted_at
  * @property Carbon $created_at
@@ -24,6 +26,7 @@ use JobMetric\Taxonomy\Models\Taxonomy;
  * @property-read Plugin $plugin
  *
  * @method Bank find(int $int)
+ * @method Bank findOrFail(int $int)
  */
 class Bank extends Model
 {
@@ -32,6 +35,8 @@ class Bank extends Model
 
     protected $fillable = [
         'type',
+        'taxonomy_id',
+        'plugin_id',
         'status',
     ];
 
@@ -42,7 +47,9 @@ class Bank extends Model
      */
     protected $casts = [
         'type' => 'string',
-        'status' => 'integer',
+        'taxonomy_id' => 'integer',
+        'plugin_id' => 'integer',
+        'status' => 'boolean',
         'deleted_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
