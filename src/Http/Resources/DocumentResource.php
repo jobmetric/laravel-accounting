@@ -5,25 +5,26 @@ namespace JobMetric\Accounting\Http\Resources;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use JobMetric\Authio\Http\Resources\UserResource;
+use JobMetric\Authio\Models\User;
 use JobMetric\Extension\Http\Resources\PluginResource;
 use JobMetric\Extension\Models\Plugin;
-use JobMetric\Taxonomy\Http\Resources\TaxonomyResource;
-use JobMetric\Taxonomy\Models\Taxonomy;
 
 /**
  * @property int $id
- * @property string $type
- * @property int $taxonomy_id
+ * @property int $user_id
  * @property int $plugin_id
- * @property bool $status
+ * @property string|null $atf
+ * @property string|null $note
+ * @property Carbon $datetime_at
  * @property Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
- * @property-read Taxonomy $taxonomy
+ * @property-read User $user
  * @property-read Plugin $plugin
  */
-class BankResource extends JsonResource
+class DocumentResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -34,16 +35,17 @@ class BankResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'type' => $this->type,
-            'taxonomy_id' => $this->taxonomy_id,
+            'user_id' => $this->user_id,
             'plugin_id' => $this->plugin_id,
-            'status' => $this->status,
+            'atf' => $this->atf,
+            'note' => $this->note,
+            'datetime_at' => Carbon::make($this->datetime_at)->format('Y-m-d H:i:s'),
             'deleted_at' => $this->deleted_at ? Carbon::make($this->deleted_at)->format('Y-m-d H:i:s') : null,
             'created_at' => Carbon::make($this->created_at)->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::make($this->updated_at)->format('Y-m-d H:i:s'),
 
-            'taxonomy' => $this->whenLoaded('taxonomy', function () {
-                return new TaxonomyResource($this->taxonomy);
+            'user' => $this->whenLoaded('user', function () {
+                return new UserResource($this->user);
             }),
 
             'plugin' => $this->whenLoaded('plugin', function () {
