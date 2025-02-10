@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use JobMetric\Accounting\Events\CountingableResourceEvent;
 use JobMetric\Authio\Models\User;
 
 /**
@@ -24,6 +25,7 @@ use JobMetric\Authio\Models\User;
  * @property Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property mixed $countingable_resource
  *
  * @property-read User $user
  * @property-read Document $document
@@ -95,5 +97,16 @@ class DocumentItem extends Model
     public function countingable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    /**
+     * Get the countingable resource attribute.
+     */
+    public function getCountingableResourceAttribute()
+    {
+        $event = new CountingableResourceEvent($this->countingable);
+        event($event);
+
+        return $event->resource;
     }
 }
