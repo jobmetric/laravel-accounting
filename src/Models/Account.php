@@ -3,6 +3,7 @@
 namespace JobMetric\Accounting\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,7 +26,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
- * @property-read Account $account
+ * @property-read Account $parent
  *
  * @method Account find(int $int)
  * @method Account findOrFail(int $int)
@@ -56,7 +57,7 @@ class Account extends Model
         'parent_id' => 'string',
         'group' => 'boolean',
         'nature' => 'boolean',
-        'conditions' => 'array',
+        'conditions' => AsArrayObject::class,
         'status' => 'boolean',
         'visible' => 'boolean',
         'level' => 'integer',
