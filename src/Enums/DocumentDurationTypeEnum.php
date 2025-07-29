@@ -2,7 +2,7 @@
 
 namespace JobMetric\Accounting\Enums;
 
-use JobMetric\PackageCore\Enums\EnumToArray;
+use JobMetric\PackageCore\Enums\EnumMacros;
 
 /**
  * @method static CHEQUE()
@@ -11,7 +11,7 @@ use JobMetric\PackageCore\Enums\EnumToArray;
  */
 enum DocumentDurationTypeEnum: string
 {
-    use EnumToArray;
+    use EnumMacros;
 
     case CHEQUE = "cheque";
     case CREDIT = "credit";

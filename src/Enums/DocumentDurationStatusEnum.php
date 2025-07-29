@@ -2,7 +2,7 @@
 
 namespace JobMetric\Accounting\Enums;
 
-use JobMetric\PackageCore\Enums\EnumToArray;
+use JobMetric\PackageCore\Enums\EnumMacros;
 
 /**
  * @method static GET()
@@ -20,7 +20,7 @@ use JobMetric\PackageCore\Enums\EnumToArray;
  */
 enum DocumentDurationStatusEnum: string
 {
-    use EnumToArray;
+    use EnumMacros;
 
     case GET = "get";
     case PENDING = "pending";

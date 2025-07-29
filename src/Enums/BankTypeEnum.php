@@ -2,7 +2,7 @@
 
 namespace JobMetric\Accounting\Enums;
 
-use JobMetric\PackageCore\Enums\EnumToArray;
+use JobMetric\PackageCore\Enums\EnumMacros;
 
 /**
  * @method static BANK()
@@ -10,7 +10,7 @@ use JobMetric\PackageCore\Enums\EnumToArray;
  */
 enum BankTypeEnum: string
 {
-    use EnumToArray;
+    use EnumMacros;
 
     case BANK = "bank";
     case CASHIER = "cashier";

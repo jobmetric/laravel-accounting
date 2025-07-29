@@ -2,7 +2,7 @@
 
 namespace JobMetric\Accounting\Enums;
 
-use JobMetric\PackageCore\Enums\EnumToArray;
+use JobMetric\PackageCore\Enums\EnumMacros;
 
 /**
  * @method static INCOME()
@@ -10,7 +10,7 @@ use JobMetric\PackageCore\Enums\EnumToArray;
  */
 enum DocumentDurationGateEnum: string
 {
-    use EnumToArray;
+    use EnumMacros;
 
     case INCOME = "income";
     case OUTCOME = "outcome";

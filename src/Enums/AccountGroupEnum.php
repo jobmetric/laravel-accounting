@@ -2,7 +2,7 @@
 
 namespace JobMetric\Accounting\Enums;
 
-use JobMetric\PackageCore\Enums\EnumToArray;
+use JobMetric\PackageCore\Enums\EnumMacros;
 
 /**
  * @method static CURRENT_ASSET()
@@ -23,7 +23,7 @@ use JobMetric\PackageCore\Enums\EnumToArray;
  */
 enum AccountGroupEnum: string
 {
-    use EnumToArray;
+    use EnumMacros;
 
     // LEVEL 0-1
     case CURRENT_ASSET = "current_asset";
